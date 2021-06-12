@@ -1,0 +1,21 @@
+.navbar-dark {
+  background-color: var(--clr-dark) !important;
+}
+
+.btn {
+  color: var(--clr-light);
+  background-color: var(--clr-accent);
+  border-color: var(--clr-accent);
+}
+
+.btn:not(:disabled):not(.disabled):active {
+  background-color: var(--clr-dark);
+}
+
+a,
+a:hover {
+  color: var(--clr-light);
+  text-decoration: none;
+  font-size: var(--fs-h2);
+  margin-left: 20px;
+}

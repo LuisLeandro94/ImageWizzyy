@@ -1,0 +1,38 @@
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+  scroll-behavior: smooth;
+}
+body {
+  margin: 0;
+  font-family: var(--ff-primary);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* General Styles */
+
+:root {
+  --ff-primary: "Source Sans Pro", sans-serif;
+  --ff-secondary: "Source Code Pro", sans-serif;
+
+  --fw-reg: 300;
+  --fw-bold: 900;
+
+  --clr-light: #fff;
+  --clr-dark: #303030;
+  --clr-accent: #16e0bd;
+  --clr-card: #fafafa;
+
+  --fs-h1: 1.5rem;
+  --fs-h2: 1rem;
+  --fs-h3: 0.75rem;
+  --fs-body: 0.75rem;
+  --fs-subtitle: 0.25rem;
+}

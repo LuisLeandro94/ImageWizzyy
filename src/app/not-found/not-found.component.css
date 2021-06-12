@@ -1,0 +1,28 @@
+h1 {
+  font-size: 3em;
+  margin-bottom: 20px;
+  font-weight: var(--fw-bold);
+  font-family: var(--ff-primary);
+  color: var(--clr-accent);
+  text-shadow: 2px 2px var(--clr-dark);
+}
+
+h2 {
+  margin-top: 20px;
+  font-size: 1.3em;
+  font-weight: var(--fw-reg);
+  font-family: var(--ff-primary);
+  color: var(--clr-dark);
+}
+
+.notfound {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  height: 500px;
+  padding: 100px;
+}
+
+a {
+  text-decoration: none;
+}

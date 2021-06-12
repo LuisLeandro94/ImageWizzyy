@@ -1,0 +1,64 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 mb-4 mb-md-0">
+      <div class="row mx-1">
+        <div class="col-12 mb-0">
+          <div class="shadow-mb">
+            <a href="{{ image.download }}" target="_blank">
+              <img src="{{ image.regPath }}" class="img-fluid"
+            /></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 height">
+      <h1 *ngIf="image.description != ''">
+        {{ image.description.concat(" ") }}
+        <span>({{ image.created_at | date: "yyyy" }})</span>
+      </h1>
+      <h1 *ngIf="image.description == ''">
+        {{ image.alt_description.concat(" ")
+        }}<span>({{ image.created_at | date: "yyyy" }})</span>
+      </h1>
+      <h2>{{ image.creator }}</h2>
+      <h3>{{ image.created_at | date: "dd/MM/yyyy" }}</h3>
+      <div class="likes_downloads">
+        <div class="likes">
+          <p>
+            <fa-icon [icon]="faHeart"></fa-icon>
+            <span>{{ image.total_likes }}</span>
+          </p>
+        </div>
+        <div class="downloads">
+          <p>
+            <fa-icon [icon]="faDownload"></fa-icon>
+            <span>{{ image.total_downloads }}</span>
+          </p>
+        </div>
+      </div>
+      <button
+        class="btn add addF"
+        routerLinkActive="active"
+        routerLink=""
+        (click)="
+          isFavorite
+            ? imageService.addToFavorite(image)
+            : imageService.remFromFavorite(image.id)
+        "
+        [ngClass]="{ remF: !isFavorite }"
+      >
+        <fa-icon [icon]="faPlus" *ngIf="isFavorite"></fa-icon
+        ><fa-icon [icon]="faMinus" *ngIf="!isFavorite"></fa-icon>
+        Favorite
+      </button>
+      <div>
+        <h2 class="tags">Tags</h2>
+        <p class="bracket">
+          [
+          <span class="dark">{{ image.tags.join(" | ") }}</span>
+          ]
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
