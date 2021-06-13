@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { faSearch, faCameraRetro } from '@fortawesome/free-solid-svg-icons';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable, Subject } from 'rxjs';
 import {
   debounceTime,
@@ -7,8 +8,8 @@ import {
   switchMap,
   tap,
 } from 'rxjs/operators';
+import { DatastoreService } from '../services/datastore.service';
 import { ImageService } from '../services/image.service';
-import { SearchService } from '../services/search.service';
 import { Image } from '../shared/image.model';
 
 @Component({
@@ -19,13 +20,24 @@ import { Image } from '../shared/image.model';
 export class NavbarComponent implements OnInit {
   faSearch = faSearch;
   faCameraRetro = faCameraRetro;
-  query: any;
   images: Image[];
   searchInput: '';
 
   isMenuCollapsed = true;
 
-  constructor() {}
+  constructor(
+    private dataStore: DatastoreService,
+    private imageService: ImageService,
+    private modalService: NgbModal
+  ) {}
 
   ngOnInit(): void {}
+
+  search(): void {
+    this.dataStore.getSearch(this.searchInput);
+  }
+
+  modalOpen(content: any) {
+    this.modalService.open(content).result.then();
+  }
 }

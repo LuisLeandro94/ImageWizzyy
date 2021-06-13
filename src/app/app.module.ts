@@ -11,10 +11,8 @@ import { ImageListComponent } from './image-list/image-list.component';
 import { ModalComponent } from './modal/modal.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { SearchResultsComponent } from './search-results/search-results.component';
 import { ImageService } from './services/image.service';
 import { FormsModule } from '@angular/forms';
-import { SearchService } from './services/search.service';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
@@ -26,7 +24,6 @@ import { HttpClientModule } from '@angular/common/http';
     ModalComponent,
     NavbarComponent,
     NotFoundComponent,
-    SearchResultsComponent,
   ],
   imports: [
     BrowserModule,

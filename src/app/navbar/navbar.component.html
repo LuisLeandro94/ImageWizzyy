@@ -50,7 +50,7 @@
         class="btn btn-outline-success my-2 my-sm-0"
         type="submit"
         (click)="isMenuCollapsed = true"
-        [routerLink]="['search', searchInput]"
+        (click)="searchInput != '' ? search() : modalOpen(modalData)"
       >
         Search
       </button>
@@ -58,3 +58,28 @@
     <app-modal *ngIf="searchInput == '' || null"></app-modal>
   </div>
 </nav>
+<ng-template #modalData let-modal>
+  <div class="modal-header">
+    <h6 class="modal-title">Search Error</h6>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>Please provide a valid search text</p>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-danger"
+      (click)="modal.close('Save click')"
+    >
+      Close
+    </button>
+  </div>
+</ng-template>

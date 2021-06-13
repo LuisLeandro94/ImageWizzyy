@@ -4,12 +4,10 @@ import { FavoritesComponent } from './favorites/favorites.component';
 import { ImageDetailsComponent } from './image-details/image-details.component';
 import { ImageListComponent } from './image-list/image-list.component';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { SearchResultsComponent } from './search-results/search-results.component';
 
 const routes: Routes = [
   { path: '', component: ImageListComponent },
   { path: 'images/:id', component: ImageDetailsComponent },
-  { path: 'search/:query', component: SearchResultsComponent },
   { path: 'favorites', component: FavoritesComponent },
   { path: 'not-found', component: NotFoundComponent },
   { path: '**', redirectTo: 'not-found' },

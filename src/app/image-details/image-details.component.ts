@@ -35,6 +35,8 @@ export class ImageDetailsComponent implements OnInit {
       this.isFavorite = this.imageService.checkIfFavorite(p.id);
       const images = this.imageService.images;
       this.image = images.filter((x) => x.id == String(p.id))[0];
+      if (this.image == undefined) {
+      }
     });
   }
 }

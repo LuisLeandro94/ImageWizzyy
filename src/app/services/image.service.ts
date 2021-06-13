@@ -3,10 +3,11 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Image } from '../shared/image.model';
 import { map, tap } from 'rxjs/operators';
+import { query } from '@angular/animations';
 
 @Injectable()
 export class ImageService {
-  images = [];
+  images: Image[] = [];
   favorites = [];
   clientID: string = 'hsntDSGlKnHUNoVJgTTvMw14mHh9GgNAEwRrwLP_j_0';
   baseURL: string =
@@ -16,65 +17,73 @@ export class ImageService {
 
   constructor(private http: HttpClient) {}
 
-  getData(): Observable<Image[]> {
-    debugger;
-    let url =
-      'https://api.unsplash.com/photos?per_page=24&order_by=latest&client_id=hsntDSGlKnHUNoVJgTTvMw14mHh9GgNAEwRrwLP_j_0&page=1';
-    return this.http.get(url).pipe(
-      map((res) => {
-        return this.convertImages(res);
-      })
-    );
+  getData(page: number) {
+    let url = `https://api.unsplash.com/photos?per_page=24&order_by=latest&client_id=hsntDSGlKnHUNoVJgTTvMw14mHh9GgNAEwRrwLP_j_0&page=${page}`;
+    return this.http.get(url);
   }
-  
 
   getImageByID(id: string) {
     let url = `https://api.unsplash.com/photos/${id}?client_id=dd4e1cb73ca3a1036d4e98d26f72a439141dc17039e1ae79b7bc2a23f3488578`;
     return this.http.get(url);
   }
 
-  convertImages(response): Image[] {
-    let imageResponse = response;
+  convertAnsw(page: number) {
+    this.images = [];
+    this.getData(page).subscribe((data) => {
+      for (const item of data as any) {
+        this.createImage(item).then((data: any) => {
+          this.images.push(data.image);
+        });
+      }
+    });
+    return this.images;
+  }
 
-    let i = 0;
+  searchAPI(queryString: string) {
+    this.images = [];
+    this.getSearch(queryString).subscribe((data: any) => {
+      debugger;
+      for (const item of data.results as any) {
+        this.createImage(item).then((data: any) => {
+          this.images.push(data.image);
+        });
+      }
+    });
+    debugger;
+    return this.images;
+  }
 
-    for (i = 0; i < imageResponse.length; i++) {
-      let image = imageResponse[i];
+  getSearch(queryString: string) {
+    return this.http.get(this.baseURL + queryString);
+  }
+
+  createImage(image: any): Promise<any> {
+    return new Promise((resolve, reject) => {
       this.getImageByID(image.id)
         .toPromise()
         .then((data: any) => {
-          const arrayTags: string[] = [];
+          let arrayTags: string[] = [];
 
-          data.tags.forEach((item) => {
-            arrayTags.push(item.title);
+          data.tags.forEach((element) => {
+            arrayTags.push(element.title);
           });
-          let description = image.description == null ? '' : image.description;
-          let alt_description =
-            image.alt_description == null ? '' : image.alt_description;
-          let created_at = image.created_at;
-          let id = image.id;
-          let path = image.urls.raw + '&fit=crop&w=500&h=500';
-          let regPath = image.urls.regular + '&fit=crop&w=500&h=500';
-          let creator = image.user.name;
-          let download = image.links.download;
-          this.images.push(
-            new Image(
-              description,
-              alt_description,
-              created_at,
-              id,
-              data.likes,
-              path,
-              regPath,
-              creator,
-              arrayTags,
-              download,
-              data.downloads
-            )
+
+          let img: Image = new Image(
+            image.description == null ? '' : image.description,
+            image.alt_description == null ? '' : image.alt_description,
+            image.created_at,
+            image.id,
+            data.likes,
+            image.urls.raw + '&fit=crop&w=500&h=500',
+            image.urls.regular + '&fit=crop&w=500&h=500',
+            image.user.name,
+            arrayTags,
+            image.links.download,
+            data.downloads
           );
+          resolve({ image: img });
         });
-    }
-    return this.images;
+    });
   }
 
   addToFavorite(image: {

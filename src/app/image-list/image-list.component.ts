@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ImageService } from '../services/image.service';
 import { Image } from '../shared/image.model';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
+import { DatastoreService } from '../services/datastore.service';
 
 @Component({
   selector: 'app-image-list',
@@ -17,11 +18,7 @@ export class ImageListComponent implements OnInit {
   page = 1;
   count = 1000;
 
-  constructor(private imageService: ImageService) {}
+  constructor(public dataStore: DatastoreService) {}
 
-  ngOnInit(): void {
-    debugger;
-    this.images = this.imageService.images;
-    this.imageService.getData().subscribe();
-  }
+  ngOnInit(): void {}
 }
