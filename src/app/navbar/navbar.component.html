@@ -62,7 +62,6 @@
         Search
       </button>
     </form>
-    <app-modal *ngIf="searchInput == '' || null"></app-modal>
   </div>
 </nav>
 <ng-template #data let-modal>
@@ -90,3 +89,4 @@
     </button>
   </div>
 </ng-template>
+<app-error *ngIf="dataStore.Images.length == 0"></app-error>

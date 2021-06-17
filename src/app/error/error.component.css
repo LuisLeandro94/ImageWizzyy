@@ -1,0 +1,33 @@
+h1 {
+  font-size: 3em;
+  margin-bottom: 20px;
+  font-weight: var(--fw-bold);
+  font-family: var(--ff-primary);
+  color: var(--clr-accent);
+  text-shadow: 2px 2px var(--clr-dark);
+}
+
+h2 {
+  margin-top: 20px;
+  font-size: 1.3em;
+  font-weight: var(--fw-reg);
+  font-family: var(--ff-primary);
+  color: var(--clr-dark);
+}
+
+.noresults {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+a {
+  text-decoration: none;
+}
+
+.img-not-found {
+  width: 500px;
+  align-self: center;
+  margin-top: 100px;
+  cursor: pointer;
+}

@@ -13,6 +13,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { ImageService } from './services/image.service';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { ErrorComponent } from './error/error.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { HttpClientModule } from '@angular/common/http';
     ImageListComponent,
     NavbarComponent,
     NotFoundComponent,
+    ErrorComponent,
   ],
   imports: [
     BrowserModule,

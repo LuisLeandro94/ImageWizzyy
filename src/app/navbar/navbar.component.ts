@@ -25,7 +25,7 @@ export class NavbarComponent implements OnInit {
   isMenuCollapsed = true;
 
   constructor(
-    private dataStore: DatastoreService,
+    public dataStore: DatastoreService,
     private modalService: NgbModal,
     private router: Router
   ) {}
