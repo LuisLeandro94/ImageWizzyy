@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { faSearch, faCameraRetro } from '@fortawesome/free-solid-svg-icons';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable, Subject } from 'rxjs';
@@ -28,7 +29,8 @@ export class NavbarComponent implements OnInit {
   constructor(
     private dataStore: DatastoreService,
     private imageService: ImageService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private router: Router
   ) {}
 
   ngOnInit(): void {}
@@ -39,5 +41,10 @@ export class NavbarComponent implements OnInit {
 
   modalOpen(content: any) {
     this.modalService.open(content).result.then();
+  }
+
+  returnList() {
+    this.dataStore.getImages(1);
+    this.router.navigate(['']);
   }
 }

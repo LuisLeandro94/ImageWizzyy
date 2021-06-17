@@ -9,6 +9,7 @@ import {
   faDownload,
 } from '@fortawesome/free-solid-svg-icons';
 import { Observable } from 'rxjs';
+import { DatastoreService } from '../services/datastore.service';
 
 @Component({
   selector: 'app-image-details',
@@ -25,17 +26,26 @@ export class ImageDetailsComponent implements OnInit {
 
   image: Image;
   images: Image[];
+  imageID: string;
 
-  constructor(imageService: ImageService, private activeRoute: ActivatedRoute) {
+  constructor(
+    imageService: ImageService,
+    private activeRoute: ActivatedRoute,
+    private dataStore: DatastoreService
+  ) {
     this.imageService = imageService;
   }
 
   ngOnInit(): void {
     this.activeRoute.params.subscribe((p) => {
+      debugger;
       this.isFavorite = this.imageService.checkIfFavorite(p.id);
       const images = this.imageService.images;
       this.image = images.filter((x) => x.id == String(p.id))[0];
       if (this.image == undefined) {
+        this.image = this.imageService.favorites.filter(
+          (x) => x.id == String(p.id)
+        )[0];
       }
     });
   }

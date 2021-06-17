@@ -8,7 +8,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FavoritesComponent } from './favorites/favorites.component';
 import { ImageDetailsComponent } from './image-details/image-details.component';
 import { ImageListComponent } from './image-list/image-list.component';
-import { ModalComponent } from './modal/modal.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { ImageService } from './services/image.service';
@@ -21,7 +20,6 @@ import { HttpClientModule } from '@angular/common/http';
     FavoritesComponent,
     ImageDetailsComponent,
     ImageListComponent,
-    ModalComponent,
     NavbarComponent,
     NotFoundComponent,
   ],

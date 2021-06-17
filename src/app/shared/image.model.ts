@@ -8,8 +8,8 @@ export class Image {
     public path: string,
     public regPath: string,
     public creator: string,
-    public tags: string[],
+    public tags: string[] | null,
     public download: string,
-    public total_downloads: number
+    public total_downloads: number | null
   ) {}
 }

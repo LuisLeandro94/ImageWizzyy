@@ -19,3 +19,7 @@ a:hover {
   font-size: var(--fs-h2);
   margin-left: 20px;
 }
+
+.cursor {
+  cursor: pointer;
+}

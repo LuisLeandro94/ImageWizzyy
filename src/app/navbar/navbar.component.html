@@ -24,7 +24,10 @@
   >
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" routerLink="" (click)="isMenuCollapsed = true"
+        <a
+          class="nav-link cursor"
+          (click)="returnList()"
+          (click)="isMenuCollapsed = true"
           >ImageWizzard <span class="sr-only">(current)</span></a
         >
       </li>
@@ -50,7 +53,7 @@
         class="btn btn-outline-success my-2 my-sm-0"
         type="submit"
         (click)="isMenuCollapsed = true"
-        (click)="searchInput != '' ? search() : modalOpen(modalData)"
+        (click)="searchInput != '' ? search() : modalOpen(data)"
       >
         Search
       </button>
@@ -58,7 +61,7 @@
     <app-modal *ngIf="searchInput == '' || null"></app-modal>
   </div>
 </nav>
-<ng-template #modalData let-modal>
+<ng-template #data let-modal>
   <div class="modal-header">
     <h6 class="modal-title">Search Error</h6>
     <button

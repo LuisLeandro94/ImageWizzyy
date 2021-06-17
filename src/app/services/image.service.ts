@@ -18,7 +18,7 @@ export class ImageService {
   constructor(private http: HttpClient) {}
 
   getData(page: number) {
-    let url = `https://api.unsplash.com/photos?per_page=24&order_by=latest&client_id=hsntDSGlKnHUNoVJgTTvMw14mHh9GgNAEwRrwLP_j_0&page=${page}`;
+    let url = `https://api.unsplash.com/photos?per_page=24&page=${page}&order_by=latest&client_id=hsntDSGlKnHUNoVJgTTvMw14mHh9GgNAEwRrwLP_j_0`;
     return this.http.get(url);
   }
 
@@ -58,6 +58,36 @@ export class ImageService {
   }
 
   createImage(image: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      let img: Image = new Image(
+        image.description == null ? '' : image.description,
+        image.alt_description == null ? '' : image.alt_description,
+        image.created_at,
+        image.id,
+        image.likes,
+        image.urls.raw + '&fit=crop&w=500&h=500',
+        image.urls.regular + '&fit=crop&w=500&h=500',
+        image.user.name,
+        null,
+        image.links.download,
+        null
+      );
+      resolve({ image: img });
+    });
+  }
+
+  convertSingle(id: string) {
+    let image: Image;
+
+    this.getImageByID(id).subscribe((data) => {
+      this.createImageDetails(data).then((data: any) => {
+        image = data.image;
+      });
+    });
+    return image;
+  }
+
+  createImageDetails(image: any): Promise<any> {
     return new Promise((resolve, reject) => {
       this.getImageByID(image.id)
         .toPromise()
@@ -119,5 +149,15 @@ export class ImageService {
         this.favorites.splice(i, 1);
       }
     }
+  }
+
+  getFavImage(id: string): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.getImageByID(id).subscribe((data) => {
+        this.createImage(data).then((data: any) => {
+          resolve({ image: data.image });
+        });
+      });
+    });
   }
 }

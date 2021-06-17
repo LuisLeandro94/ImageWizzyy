@@ -37,4 +37,23 @@
       </a>
     </div>
   </div>
+  <nav aria-label="pagination" class="pagination">
+    <ul class="pagination">
+      <li class="page-item" [ngClass]="{ disabled: dataStore.Page == 1 }">
+        <a class="page-link" aria-label="Previous" (click)="paginationL()">
+          <fa-icon [icon]="faArrowLeft"></fa-icon>
+          <span class="sr-only">Previous</span>
+        </a>
+      </li>
+      <li
+        class="page-item"
+        [ngClass]="{ disabled: dataStore.Images.length < 24 }"
+      >
+        <a class="page-link" aria-label="Next" (click)="paginationR()">
+          <fa-icon [icon]="faArrowRight"></fa-icon>
+          <span class="sr-only">Next</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
 </div>

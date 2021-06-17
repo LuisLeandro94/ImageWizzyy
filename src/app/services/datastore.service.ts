@@ -10,6 +10,12 @@ export class DatastoreService {
   images = new BehaviorSubject<any>([]);
   images$ = this.images.asObservable();
 
+  image = new BehaviorSubject<any>(null);
+  image$ = this.image.asObservable();
+
+  page = new BehaviorSubject<any>(1);
+  page$ = this.page.asObservable();
+
   constructor(private imageService: ImageService) {}
 
   get Images(): Image[] {
@@ -20,11 +26,36 @@ export class DatastoreService {
     this.images.next(value);
   }
 
+  get Image(): Image {
+    return this.image.getValue();
+  }
+
+  set Image(value: Image) {
+    this.image.next(value);
+  }
+
+  get Page(): any {
+    return this.page.getValue();
+  }
+
+  set Page(value: any) {
+    this.page.next(value);
+  }
+
   async getImages(page: number) {
+    debugger;
     this.Images = await this.imageService.convertAnsw(page);
   }
 
   async getSearch(queryString: string) {
     this.Images = await this.imageService.searchAPI(queryString);
+  }
+
+  async getFav(id: string | null) {
+    if (id != null) {
+      this.Image = await this.imageService.convertSingle(id);
+    } else {
+      this.Image = <Image>{}; //declara um objeto vazio -- APRENDE NABE
+    }
   }
 }

@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ImageService } from '../services/image.service';
 import { Image } from '../shared/image.model';
-import { faEye } from '@fortawesome/free-solid-svg-icons';
+import {
+  faEye,
+  faArrowRight,
+  faArrowLeft,
+} from '@fortawesome/free-solid-svg-icons';
 import { DatastoreService } from '../services/datastore.service';
 
 @Component({
@@ -13,12 +17,23 @@ import { DatastoreService } from '../services/datastore.service';
 export class ImageListComponent implements OnInit {
   images: Image[] = [];
   faEye = faEye;
+  faArrowRight = faArrowRight;
+  faArrowLeft = faArrowLeft;
 
-  router: string;
-  page = 1;
-  count = 1000;
-
-  constructor(public dataStore: DatastoreService) {}
+  constructor(
+    public dataStore: DatastoreService,
+    public imageService: ImageService
+  ) {}
 
   ngOnInit(): void {}
+
+  paginationR() {
+    this.dataStore.Page += 1;
+    this.dataStore.getImages(this.dataStore.Page);
+  }
+
+  paginationL() {
+    this.dataStore.Page -= 1;
+    this.dataStore.getImages(this.dataStore.Page);
+  }
 }
