@@ -76,15 +76,17 @@ export class ImageService {
     });
   }
 
-  convertSingle(id: string) {
+  convertSingle(id: string): Promise<any> {
     let image: Image;
 
-    this.getImageByID(id).subscribe((data) => {
-      this.createImageDetails(data).then((data: any) => {
-        image = data.image;
+    return new Promise((resolve, reject) => {
+      this.getImageByID(id).subscribe((data) => {
+        this.createImageDetails(data).then((data: any) => {
+          image = data.image;
+          resolve({ image: image });
+        });
       });
     });
-    return image;
   }
 
   createImageDetails(image: any): Promise<any> {

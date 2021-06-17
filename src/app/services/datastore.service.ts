@@ -53,9 +53,11 @@ export class DatastoreService {
 
   async getFav(id: string | null) {
     if (id != null) {
-      this.Image = await this.imageService.convertSingle(id);
+      await this.imageService.convertSingle(id).then((data: any) => {
+        this.Image = data.image;
+      });
     } else {
-      this.Image = <Image>{}; //declara um objeto vazio -- APRENDE NABE
+      this.Image = <Image>{};
     }
   }
 }

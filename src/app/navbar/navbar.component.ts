@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { faSearch, faCameraRetro } from '@fortawesome/free-solid-svg-icons';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Observable, Subject } from 'rxjs';
 import {
   debounceTime,
   distinctUntilChanged,
@@ -10,7 +9,6 @@ import {
   tap,
 } from 'rxjs/operators';
 import { DatastoreService } from '../services/datastore.service';
-import { ImageService } from '../services/image.service';
 import { Image } from '../shared/image.model';
 
 @Component({
@@ -28,7 +26,6 @@ export class NavbarComponent implements OnInit {
 
   constructor(
     private dataStore: DatastoreService,
-    private imageService: ImageService,
     private modalService: NgbModal,
     private router: Router
   ) {}
@@ -36,6 +33,7 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {}
 
   search(): void {
+    debugger;
     this.dataStore.getSearch(this.searchInput);
   }
 

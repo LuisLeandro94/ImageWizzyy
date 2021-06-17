@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ImageService } from '../services/image.service';
 import { Image } from '../shared/image.model';
@@ -16,7 +16,7 @@ import { DatastoreService } from '../services/datastore.service';
   templateUrl: './image-details.component.html',
   styleUrls: ['./image-details.component.css'],
 })
-export class ImageDetailsComponent implements OnInit {
+export class ImageDetailsComponent implements OnInit, OnDestroy {
   imageService: ImageService;
   faPlus = faPlus;
   faMinus = faMinus;
@@ -31,22 +31,19 @@ export class ImageDetailsComponent implements OnInit {
   constructor(
     imageService: ImageService,
     private activeRoute: ActivatedRoute,
-    private dataStore: DatastoreService
+    public dataStore: DatastoreService
   ) {
     this.imageService = imageService;
   }
 
   ngOnInit(): void {
     this.activeRoute.params.subscribe((p) => {
-      debugger;
       this.isFavorite = this.imageService.checkIfFavorite(p.id);
-      const images = this.imageService.images;
-      this.image = images.filter((x) => x.id == String(p.id))[0];
-      if (this.image == undefined) {
-        this.image = this.imageService.favorites.filter(
-          (x) => x.id == String(p.id)
-        )[0];
-      }
+      this.dataStore.getFav(p.id);
     });
+  }
+
+  ngOnDestroy(): void {
+    this.dataStore.getFav(null);
   }
 }

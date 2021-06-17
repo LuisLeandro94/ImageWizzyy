@@ -53,7 +53,11 @@
         class="btn btn-outline-success my-2 my-sm-0"
         type="submit"
         (click)="isMenuCollapsed = true"
-        (click)="searchInput != '' ? search() : modalOpen(data)"
+        (click)="
+          searchInput != '' && searchInput != undefined
+            ? search()
+            : modalOpen(data)
+        "
       >
         Search
       </button>
