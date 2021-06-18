@@ -11,6 +11,7 @@ import { faEye } from '@fortawesome/free-solid-svg-icons';
 export class FavoritesComponent implements OnInit {
   faEye = faEye;
   imageService: ImageService;
+  p: number = 1;
 
   constructor(imageService: ImageService) {
     this.imageService = imageService;

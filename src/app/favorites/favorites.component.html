@@ -2,7 +2,10 @@
   <div class="row pb-5 mb-4">
     <div
       class="col-lg-3 col-md-4 col-sm-6 col-6 mb-4 mb-lg-0"
-      *ngFor="let image of imageService.favorites"
+      *ngFor="
+        let image of imageService.favorites
+          | paginate: { itemsPerPage: 4, currentPage: p }
+      "
     >
       <a [routerLink]="['/images', image.id]">
         <div class="card rounded shadow-sm border-0 mb-5">
@@ -36,5 +39,6 @@
         </div>
       </a>
     </div>
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
   </div>
 </div>

@@ -44,6 +44,15 @@ a {
   padding-bottom: 5px;
 }
 
-.pagination.pg-blue {
-  justify-content: center;
+pagination-controls {
+  position: fixed;
+  left: 0;
+  bottom: 10px;
+  width: 100%;
+  text-align: center;
+  z-index: 999;
+}
+
+pagination-controls /deep/ .ngx-pagination .current {
+  background: var(--clr-accent);
 }
