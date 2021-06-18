@@ -69,7 +69,6 @@ export class ImageService {
         image.urls.regular + '&fit=crop&w=500&h=500',
         image.user.name,
         null,
-        image.links.download,
         null
       );
       resolve({ image: img });
@@ -110,7 +109,6 @@ export class ImageService {
             image.urls.regular + '&fit=crop&w=500&h=500',
             image.user.name,
             arrayTags,
-            image.links.download,
             data.downloads
           );
           resolve({ image: img });
@@ -128,7 +126,6 @@ export class ImageService {
     regPath: string;
     creator: string;
     tags: string[];
-    download: string;
     total_downloads: number;
   }) {
     this.insertFavorite(image);

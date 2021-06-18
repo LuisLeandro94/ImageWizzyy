@@ -9,7 +9,6 @@ export class Image {
     public regPath: string,
     public creator: string,
     public tags: string[] | null,
-    public download: string,
     public total_downloads: number | null
   ) {}
 }
