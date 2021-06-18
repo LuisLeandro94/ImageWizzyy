@@ -1,9 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import { Image } from '../shared/image.model';
-import { map, tap } from 'rxjs/operators';
-import { query } from '@angular/animations';
 
 @Injectable()
 export class ImageService {
@@ -42,14 +39,12 @@ export class ImageService {
   searchAPI(queryString: string) {
     this.images = [];
     this.getSearch(queryString).subscribe((data: any) => {
-      debugger;
       for (const item of data.results as any) {
         this.createImage(item).then((data: any) => {
           this.images.push(data.image);
         });
       }
     });
-    debugger;
     return this.images;
   }
 

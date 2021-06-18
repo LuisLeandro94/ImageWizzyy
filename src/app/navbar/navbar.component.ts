@@ -2,12 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { faSearch, faCameraRetro } from '@fortawesome/free-solid-svg-icons';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import {
-  debounceTime,
-  distinctUntilChanged,
-  switchMap,
-  tap,
-} from 'rxjs/operators';
 import { DatastoreService } from '../services/datastore.service';
 import { Image } from '../shared/image.model';
 
@@ -33,7 +27,6 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {}
 
   search(): void {
-    debugger;
     this.dataStore.getSearch(this.searchInput);
   }
 

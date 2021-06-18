@@ -18,7 +18,6 @@ export class FavoritesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    debugger;
     let favorites: Image[] = this.imageService.favorites;
   }
 }

@@ -8,7 +8,6 @@ import {
   faHeart,
   faDownload,
 } from '@fortawesome/free-solid-svg-icons';
-import { Observable } from 'rxjs';
 import { DatastoreService } from '../services/datastore.service';
 
 @Component({

@@ -43,7 +43,6 @@ export class DatastoreService {
   }
 
   async getImages(page: number) {
-    debugger;
     this.Images = await this.imageService.convertAnsw(page);
   }
 
