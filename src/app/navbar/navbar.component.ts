@@ -37,6 +37,7 @@ export class NavbarComponent implements OnInit {
 
   search(): void {
     this.dataStore.getSearch(this.searchInput, this.dataStore.PageSearch);
+    this.router.navigate(['']);
   }
 
   modalOpen(content: any) {
