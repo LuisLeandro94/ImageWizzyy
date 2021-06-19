@@ -29,7 +29,7 @@ export class NavbarComponent implements OnInit {
   constructor(
     public dataStore: DatastoreService,
     private modalService: NgbModal,
-    private router: Router,
+    public router: Router,
     private imageService: ImageService
   ) {}
 
