@@ -70,4 +70,12 @@ export class NavbarComponent implements OnInit {
       this.dataStore.getSearch(this.searchInput, this.dataStore.PageSearch);
     }
   }
+
+  checkURL(): boolean {
+    if (this.router.url.includes('/images/')) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }

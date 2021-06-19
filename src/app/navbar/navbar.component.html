@@ -93,7 +93,7 @@
   aria-label="pagination"
   class="pagination"
   [ngClass]="{ hidden: dataStore.Images.length == 0 }"
-  *ngIf="router.url != '/favorites'"
+  *ngIf="router.url != '/favorites' && !checkURL()"
 >
   <ul class="pagination">
     <li class="page-item" [ngClass]="{ disabled: dataStore.Page == 1 }">
