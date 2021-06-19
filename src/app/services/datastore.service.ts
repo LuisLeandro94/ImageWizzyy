@@ -16,6 +16,9 @@ export class DatastoreService {
   page = new BehaviorSubject<any>(1);
   page$ = this.page.asObservable();
 
+  pageSearch = new BehaviorSubject<any>(1);
+  pageSearch$ = this.page.asObservable();
+
   constructor(private imageService: ImageService) {}
 
   get Images(): Image[] {
@@ -42,12 +45,20 @@ export class DatastoreService {
     this.page.next(value);
   }
 
+  get PageSearch(): any {
+    return this.pageSearch.getValue();
+  }
+
+  set PageSearch(value: any) {
+    this.pageSearch.next(value);
+  }
+
   async getImages(page: number) {
     this.Images = await this.imageService.convertAnsw(page);
   }
 
-  async getSearch(queryString: string) {
-    this.Images = await this.imageService.searchAPI(queryString);
+  async getSearch(queryString: string, page: number) {
+    this.Images = await this.imageService.searchAPI(queryString, page);
   }
 
   async getFav(id: string | null) {

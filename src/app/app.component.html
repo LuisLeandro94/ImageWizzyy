@@ -1,2 +1,5 @@
 <app-navbar></app-navbar>
+<app-error
+  *ngIf="dataStore.Images.length === 0 && imageService.isSearch == true"
+></app-error>
 <router-outlet></router-outlet>

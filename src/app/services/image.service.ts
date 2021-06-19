@@ -4,6 +4,7 @@ import { Image } from '../shared/image.model';
 
 @Injectable()
 export class ImageService {
+  isSearch: boolean = false;
   images: Image[] = [];
   favorites = [];
   clientID: string = 'hsntDSGlKnHUNoVJgTTvMw14mHh9GgNAEwRrwLP_j_0';
@@ -25,6 +26,7 @@ export class ImageService {
   }
 
   convertAnsw(page: number) {
+    this.isSearch = false;
     this.images = [];
     this.getData(page).subscribe((data) => {
       for (const item of data as any) {
@@ -36,9 +38,10 @@ export class ImageService {
     return this.images;
   }
 
-  searchAPI(queryString: string) {
+  searchAPI(queryString: string, page: number) {
+    this.isSearch = true;
     this.images = [];
-    this.getSearch(queryString).subscribe((data: any) => {
+    this.getSearch(queryString, page).subscribe((data: any) => {
       for (const item of data.results as any) {
         this.createImage(item).then((data: any) => {
           this.images.push(data.image);
@@ -48,8 +51,9 @@ export class ImageService {
     return this.images;
   }
 
-  getSearch(queryString: string) {
-    return this.http.get(this.baseURL + queryString);
+  getSearch(queryString: string, page: number) {
+    let url = `https://api.unsplash.com/search/photos?per_page=24&page=${page}&order_by=latest&client_id=hsntDSGlKnHUNoVJgTTvMw14mHh9GgNAEwRrwLP_j_0&query=${queryString}`;
+    return this.http.get(url);
   }
 
   createImage(image: any): Promise<any> {

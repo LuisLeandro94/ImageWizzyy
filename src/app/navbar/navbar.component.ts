@@ -1,8 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { faSearch, faCameraRetro } from '@fortawesome/free-solid-svg-icons';
+import {
+  faSearch,
+  faCameraRetro,
+  faArrowRight,
+  faArrowLeft,
+} from '@fortawesome/free-solid-svg-icons';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DatastoreService } from '../services/datastore.service';
+import { ImageService } from '../services/image.service';
 import { Image } from '../shared/image.model';
 
 @Component({
@@ -13,6 +19,8 @@ import { Image } from '../shared/image.model';
 export class NavbarComponent implements OnInit {
   faSearch = faSearch;
   faCameraRetro = faCameraRetro;
+  faArrowLeft = faArrowLeft;
+  faArrowRight = faArrowRight;
   images: Image[];
   searchInput: '';
 
@@ -21,13 +29,14 @@ export class NavbarComponent implements OnInit {
   constructor(
     public dataStore: DatastoreService,
     private modalService: NgbModal,
-    private router: Router
+    private router: Router,
+    private imageService: ImageService
   ) {}
 
   ngOnInit(): void {}
 
   search(): void {
-    this.dataStore.getSearch(this.searchInput);
+    this.dataStore.getSearch(this.searchInput, this.dataStore.PageSearch);
   }
 
   modalOpen(content: any) {
@@ -37,5 +46,26 @@ export class NavbarComponent implements OnInit {
   returnList() {
     this.dataStore.getImages(1);
     this.router.navigate(['']);
+  }
+
+  paginationR() {
+    if (this.imageService.isSearch == false) {
+      this.dataStore.Page += 1;
+      this.dataStore.getImages(this.dataStore.Page);
+    } else {
+      debugger;
+      this.dataStore.PageSearch += 1;
+      this.dataStore.getSearch(this.searchInput, this.dataStore.PageSearch);
+    }
+  }
+
+  paginationL() {
+    if (this.imageService.isSearch == false) {
+      this.dataStore.Page -= 1;
+      this.dataStore.getImages(this.dataStore.Page);
+    } else {
+      this.dataStore.PageSearch -= 1;
+      this.dataStore.getSearch(this.searchInput, this.dataStore.PageSearch);
+    }
   }
 }

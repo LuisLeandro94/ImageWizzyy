@@ -23,3 +23,22 @@ a:hover {
 .cursor {
   cursor: pointer;
 }
+
+.pagination {
+  position: fixed;
+  left: 0;
+  bottom: 10px;
+  width: 100%;
+  text-align: center;
+  z-index: 999;
+}
+
+.page-link {
+  color: var(--clr-accent);
+  background-color: var(--clr-dark);
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+}
