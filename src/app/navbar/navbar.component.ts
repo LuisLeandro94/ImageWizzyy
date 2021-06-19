@@ -46,6 +46,7 @@ export class NavbarComponent implements OnInit {
   returnList() {
     this.dataStore.getImages(1);
     this.router.navigate(['']);
+    this.dataStore.PageSearch = 1;
   }
 
   paginationR() {
